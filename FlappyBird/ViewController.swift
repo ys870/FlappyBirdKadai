@@ -8,8 +8,11 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class ViewController: UIViewController {
+    
+    var bgmPlayer:AVAudioPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,18 @@ class ViewController: UIViewController {
         
         // ビューにシーンを表示する
         skView.presentScene(scene)
+        
+        // ★BGMを鳴らす  ---ここから---
+        let bgmURL = Bundle.main.bundleURL.appendingPathComponent("stageBGM.mp3")
+        do {
+            bgmPlayer = try AVAudioPlayer(contentsOf: bgmURL)
+            bgmPlayer?.numberOfLoops = -1
+            bgmPlayer?.prepareToPlay()
+            bgmPlayer?.play()
+        } catch {
+            print("error")
+        }
+        //  ---ここまで---
     }
 
     // ステータスバーを消す
