@@ -33,17 +33,16 @@ class ViewController: UIViewController {
         // ビューにシーンを表示する
         skView.presentScene(scene)
         
-        // ★BGMを鳴らす  ---ここから---
-        let bgmURL = Bundle.main.bundleURL.appendingPathComponent("stageBGM.mp3")
-        do {
-            bgmPlayer = try AVAudioPlayer(contentsOf: bgmURL)
-            bgmPlayer?.numberOfLoops = -1
-            bgmPlayer?.prepareToPlay()
-            bgmPlayer?.play()
-        } catch {
-            print("error")
-        }
-        //  ---ここまで---
+        // BGMを鳴らす
+//        let bgmURL = Bundle.main.bundleURL.appendingPathComponent("stageBGM.mp3")
+//        do {
+//            bgmPlayer = try AVAudioPlayer(contentsOf: bgmURL)
+//            bgmPlayer?.numberOfLoops = -1
+//            bgmPlayer?.prepareToPlay()
+//            bgmPlayer?.play()
+//        } catch {
+//            print("error")
+//        }
     }
 
     // ステータスバーを消す

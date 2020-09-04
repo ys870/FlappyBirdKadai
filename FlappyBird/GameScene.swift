@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scrollNode:SKNode!
     var wallNode:SKNode!
     var bird:SKSpriteNode!
+    var item:SKNode!
     
     // 衝突判定カテゴリー
     let birdCategory: UInt32 = 1 << 0     // 0...00001
@@ -49,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCloud()
         setupWall()
         setupBird()
+        setupItem()
         
         setupScoreLabel()
     }
@@ -336,6 +338,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func setupItem() {
+        // アイテムの画像を読み込む
+        let itemTexture = SKTexture(imageNamed: "item")
+        
+        // 移動する距離を計算
+        let movingDistance = CGFloat(self.frame.size.width + itemTexture.size().width)
+        
+        // 画面外まで移動するアクションを作成
+        let moveItem = SKAction.moveBy(x: -movingDistance, y: 0, duration:4)
+        
+        // 自身を取り除くアクションを作成
+        let removeItem = SKAction.removeFromParent()
+
+        // 2つのアニメーションを順に実行するアクションを作成
+        let itemAnimation = SKAction.sequence([moveItem, removeItem])
+        
+        // アイテムを生成するアクションを作成
+        let createItemAnimation = SKAction.run({
+        // アイテム関連のノードを乗せるノードを作成
+        let item = SKNode()
+        item.position = CGPoint(x: self.frame.size.width + itemTexture.size().width / 2, y: 0)
+        item.zPosition = -50 // 雲より手前、地面より奥
+
+        item.run(itemAnimation)
+
+        self.wallNode.addChild(item)
+            
+        })
+
+        // 次のアイテム作成までの時間待ちのアクションを作成
+        let waitAnimation = SKAction.wait(forDuration: 2)
+
+        // アイテムを作成->時間待ち->アイテムを作成を無限に繰り返すアクションを作成
+        let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
+
+        wallNode.run(repeatForeverAnimation)
+        
+    }
     // リスタート処理
     func restart() {
         score = 0
