@@ -71,10 +71,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelNode.text = "Score:\(score)"
         self.addChild(scoreLabelNode)
         
+        // アイテムスコア
+        itemScore = 0
+        itemScoreLabelNode = SKLabelNode()
+        itemScoreLabelNode.fontColor = UIColor.black
+        itemScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 90)
+        itemScoreLabelNode.zPosition = 100  // 一番手前に表示する
+        itemScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        itemScoreLabelNode.text = "Item Score:\(itemScore)"
+        self.addChild(itemScoreLabelNode)
+        
         // ベストスコア
         bestScoreLabelNode = SKLabelNode()
         bestScoreLabelNode.fontColor = UIColor.black
-        bestScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 90)
+        bestScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 120)
         bestScoreLabelNode.zPosition = 100  // 一番手前に表示する
         bestScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         
@@ -317,14 +327,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score += 1
             scoreLabelNode.text = "Score:\(score)"
             
-            // ベストスコア更新か確認する  ---ここから---
+            // ベストスコア更新か確認する
             var bestScore = userDefaults.integer(forKey: "BEST")
             if score > bestScore {
                 bestScore = score
                 bestScoreLabelNode.text = "Best Score:\(bestScore)"
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
-            }  // ---ここまで---
+            
+            // アイテムと衝突した時
+        } else if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory || (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
+                print("ItemScoreUp")
+                itemScore += 1
+                itemScoreLabelNode.text = "Item Score:\(itemScore)"
+        }
+            
         } else {
             // 壁か地面と衝突した
             print("GameOver")
@@ -389,37 +406,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             under.position = CGPoint(x: 0, y: under_wall_y)
             
             // スプライトに物理演算を設定する
-//            under.physicsBody = SKPhysicsBody(rectangleOf: itemTexture.size())
-//            under.physicsBody?.categoryBitMask = self.scoreCategory
-//
-//            // 衝突の時に動かないように設定する
-//            under.physicsBody?.isDynamic = false
+//            item.physicsBody = SKPhysicsBody(rectangleOf: itemTexture.size())
+            item.physicsBody?.categoryBitMask = self.itemCategory
 
             item.addChild(under)
             
-            // 上側の壁を作成
-//            let upper = SKSpriteNode(texture: wallTexture)
-//            upper.position = CGPoint(x: 0, y: under_wall_y + wallTexture.size().height + slit_length)
-//
-////            // スプライトに物理演算を設定する
-////            upper.physicsBody = SKPhysicsBody(rectangleOf: wallTexture.size())
-////            upper.physicsBody?.categoryBitMask = self.wallCategory
-////
-////            // 衝突の時に動かないように設定する
-////            upper.physicsBody?.isDynamic = false
-//
-//            wall.addChild(upper)
-            
-            // アイテムスコアアップ用のノード ---ここから---
-//            let itemScoreNode = SKNode()
-//            itemScoreNode.position = CGPoint(x: under.size.width + birdSize.width / 2, y: self.frame.height / 2)
-//            itemScoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: under.size.width, height: self.frame.size.height))
-//            itemScoreNode.physicsBody?.isDynamic = false
-//            itemScoreNode.physicsBody?.categoryBitMask = self.itemCategory
-//            itemScoreNode.physicsBody?.contactTestBitMask = self.birdCategory
-//            
-//            item.addChild(itemScoreNode)
-            // ---ここまで---
+            // アイテムスコアアップ用のノード  —ここから—
+            let itemScoreNode = SKNode()
+            itemScoreNode .physicsBody?.isDynamic = false
+            itemScoreNode .physicsBody?.categoryBitMask = self.itemCategory
+            itemScoreNode .physicsBody?.contactTestBitMask = self.birdCategory
+
+            item.addChild(itemScoreNode)
             
             item.run(itemAnimation)
             
