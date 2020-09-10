@@ -419,20 +419,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         itemNode.run(repeatForeverAnimation)
     }
-    
-    // 画面をタップした時に呼ばれる
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if scrollNode.speed > 0 {
-            // 鳥の速度をゼロにする
-            bird.physicsBody?.velocity = CGVector.zero
-        
-            // 鳥に縦方向の力を与える
-            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
-        } else if bird.speed == 0 {
-            restart()
-        }
-    }
-    
+
     // SKPhysicsContactDelegateのメソッド。衝突したときに呼ばれる
     func didBegin(_ contact: SKPhysicsContact) {
         // ゲームオーバーのときは何もしない
@@ -473,15 +460,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bestScoreLabelNode.text = "Best Score:\(bestScore)"
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
-                
-//            } else if itemScore > bestScore {
-//                itemScore = score
-//                bestScoreLabelNode.text = "Best Score:\(bestScore)"
-//                userDefaults.set(bestScore, forKey: "BEST")
-//                userDefaults.synchronize()
             }
             
-            } else {
+        } else {
             // 壁か地面と衝突した
             print("GameOver")
             // BGMを止める
@@ -502,7 +483,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
         }
     }
-    
+
     // リスタート処理
     func restart() {
         
@@ -522,5 +503,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bird.speed = 1
         scrollNode.speed = 1
+    }
+    
+    // 画面をタップした時に呼ばれる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if scrollNode.speed > 0 {
+            // 鳥の速度をゼロにする
+            bird.physicsBody?.velocity = CGVector.zero
+            // 鳥に縦方向の力を与える
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
+        } else if bird.speed == 0 {
+            restart()
+        }
     }
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F67774132508FACE00DA6BEF /* SE_item.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F67774122508FACE00DA6BEF /* SE_item.mp3 */; };
 		F67774152508FC1000DA6BEF /* SE_gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F67774142508FC1000DA6BEF /* SE_gameover.mp3 */; };
-		F6777417250907F200DA6BEF /* hakugin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6777416250907F200DA6BEF /* hakugin.mp3 */; };
 		F677741B250915CC00DA6BEF /* wood_note.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F677741A250915CC00DA6BEF /* wood_note.mp3 */; };
 		F6E05B5624F73C52000D7CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E05B5524F73C52000D7CCE /* AppDelegate.swift */; };
 		F6E05B5824F73C52000D7CCE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E05B5724F73C52000D7CCE /* SceneDelegate.swift */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		F67774122508FACE00DA6BEF /* SE_item.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SE_item.mp3; sourceTree = "<group>"; };
 		F67774142508FC1000DA6BEF /* SE_gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SE_gameover.mp3; path = sound/SE_gameover.mp3; sourceTree = SOURCE_ROOT; };
-		F6777416250907F200DA6BEF /* hakugin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hakugin.mp3; sourceTree = "<group>"; };
 		F677741A250915CC00DA6BEF /* wood_note.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wood_note.mp3; sourceTree = "<group>"; };
 		F6E05B5224F73C51000D7CCE /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E05B5524F73C52000D7CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 				F6E05B6024F73C56000D7CCE /* LaunchScreen.storyboard */,
 				F6E05B6324F73C56000D7CCE /* Info.plist */,
 				F677741A250915CC00DA6BEF /* wood_note.mp3 */,
-				F6777416250907F200DA6BEF /* hakugin.mp3 */,
 				F67774122508FACE00DA6BEF /* SE_item.mp3 */,
 				F67774142508FC1000DA6BEF /* SE_gameover.mp3 */,
 			);
@@ -143,7 +140,6 @@
 				F67774152508FC1000DA6BEF /* SE_gameover.mp3 in Resources */,
 				F677741B250915CC00DA6BEF /* wood_note.mp3 in Resources */,
 				F6E05B6224F73C56000D7CCE /* LaunchScreen.storyboard in Resources */,
-				F6777417250907F200DA6BEF /* hakugin.mp3 in Resources */,
 				F6E05B5F24F73C56000D7CCE /* Assets.xcassets in Resources */,
 				F67774132508FACE00DA6BEF /* SE_item.mp3 in Resources */,
 				F6E05B5D24F73C52000D7CCE /* Main.storyboard in Resources */,
